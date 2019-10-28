@@ -6,5 +6,64 @@
 </head>
 <body>
 this is test.vm
+    <!-- 基础变量取值 -->
+    #set($name="hello")
+    <div>
+        ${name}
+    </div>
+    <div>
+        $name
+    </div>
+
+    <!-- 对象取值 -->
+    <div>
+        ${student.studentName}
+    </div>
+    <div>
+        $student.studentName
+    </div>
+
+    <!-- 对象集合遍历 -->
+    #foreach($student in $studentList)
+        <div>
+            $student.studentId -->> $student.studentName
+        </div>
+    #end
+    #foreach(${student} in ${studentList})
+     <div>
+         ${student.studentId} -->> ${student.studentName}
+     </div>
+    #end
+
+    <!-- 遍历数组（带索引） -->
+    #set($list = ["aaa","bbb","ccc"])
+    #foreach($element in $list)
+        <div>count=$velocityCount, $element</div>
+    #end
+
+    <!-- 遍历map -->
+    #foreach($key in $studentMap.keySet())
+        #set($student = $studentMap.get($key))
+        <div>key=$key, studentId=$!student.studentId, studentName=$student.studentName</div>
+    #end
+
+    <!-- 条件语句 -->
+    #set($gender="0")
+    #if($gender=="1")
+        <div>男</div>
+    #elseif($gender=="2")
+        <div>女</div>
+    #else
+        <div>未知</div>
+    #end
+
+    <!-- 关系和逻辑操作符（&& || ） -->
+    #set($isMan = true)
+    #set($isWoman = false)
+    #if($isMan && !$isWoman)
+        <div>男的可以哟</div>
+    #else
+        <div>只要男的</div>
+    #end
 </body>
 </html>
